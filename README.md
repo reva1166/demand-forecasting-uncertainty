@@ -1,13 +1,11 @@
 # demand-forecasting-uncertainty
 Quantile forecasting with calibrated prediction intervals on M5 Walmart data
-
-# 📈 M5 Uncertainty Demand Forecasting & Cost-Sensitive Optimization
-
+# M5 Uncertainty Demand Forecasting & Cost-Sensitive Optimization
 An end-to-end supply chain demand forecasting pipeline built on the **M5 Competition dataset**. This project uses **LightGBM Quantile Regression**, **Post-Hoc Conformal Calibration**, and an **Asymmetric Business Cost Matrix** to convert probabilistic predictions into actionable inventory optimization decisions.
 
 ---
 
-## 📌 Executive Summary & Key Results
+## Executive Summary & Key Results
 
 - **Cost Reduction:** Achieved a **~21.8% reduction in total operational inventory costs** using a cost-sensitive $P_{90}$ upper-bound quantile forecast compared to a standard point forecast ($P_{50}$).
 - **Interval Coverage:** Post-hoc conformal calibration improved test set $P_{90}$ coverage to **90.0%**, perfectly aligning with the target 90% confidence level.
@@ -15,16 +13,7 @@ An end-to-end supply chain demand forecasting pipeline built on the **M5 Competi
 
 ---
 
-## 🏗️ Architecture & Methodology
-
-
-
-
-[Raw M5 Data] ➡️ [Feature Engineering (Lags 28+, Promos, Prices)] ➡️ [LightGBM Quantile Regressor (P10, P50, P90)]
-⬇️
-[Decision Matrix / Fill Rate Optimization] ⬅️ [Conformal Calibration (Coverage Tuning)]
-
-
+## Architecture & Methodology
 
 1. **Non-Leakage Feature Engineering:** Engineered rolling lag features shifted by $\ge 28$ days to mirror real-world 28-day advance planning horizons without temporal leakage.
 2. **Quantile Regression:** Trained LightGBM models using asymmetric pinball loss to predict $P_{10}$, $P_{50}$ (median demand), and $P_{90}$ prediction bounds.
@@ -35,7 +24,7 @@ $$\text{Total Cost} = (c_{\text{under}} \times \text{Units Short}) + (c_{\text{o
 
 ---
 
-## 📊 Experimental Results
+## Experimental Results
 
 ### Point Forecast Accuracy (Test Set)
 | Strategy | MAE | RMSE |
@@ -60,24 +49,18 @@ $$\text{Total Cost} = (c_{\text{under}} \times \text{Units Short}) + (c_{\text{o
 
 ---
 
-## 🔬 Diagnostic Analysis & Known Failure Modes
+## Diagnostic Analysis & Known Failure Modes
 
 Through stratified error analysis, the pipeline revealed **conditional overconfidence during peak demand spikes**:
 - **Normal Days Coverage:** ~94.1% (reliable prediction bounds)
 - **Spike Days Coverage:** ~29.9% (interval width narrows during sudden, unobserved demand surges)
 
-**Root Causes Identified:**
-- **Information Lag:** Strict 28-day lag constraints blind the model to short-term momentum preceding a spike.
-- **Quantile Loss Smoothing:** Tree-based pinball loss optimization prioritizes fitting baseline demand days (~90%+ of history), smoothing over extreme tail risks.
-- **Item Velocity Impact:** Fast-moving items exhibited lower coverage (76.5% under residual method vs. 87.9% under Quantile Regression) compared to slow-moving, intermittent items.
 
----
 
-## 🚀 Future Roadmap (Phase 2 Improvements)
+## Future Roadmap (Phase 2 Improvements)
 
 1. **Stratified / Conditional Conformal Calibration:** Apply separate calibration residuals ($q_{\text{hat}}$) partitioned by predicted volatility (Normal vs. Event/Spike Days).
 2. **Event Proximity Features:** Engineer explicit countdown/count-up features (`days_to_event`, `days_after_event`) to help decision trees isolate high-variance regimes.
-3. **Two-Stage Hurdle Model:** Deploy a Stage-1 spike classifier paired with conditional quantile regression.
 
 ---
 Clone the Repository
