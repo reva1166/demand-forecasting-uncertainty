@@ -80,7 +80,9 @@ Through stratified error analysis, the pipeline revealed **conditional overconfi
 3. **Two-Stage Hurdle Model:** Deploy a Stage-1 spike classifier paired with conditional quantile regression.
 
 ---
-
+Clone the Repository
+git clone https://github.com/reva1166/demand-forecasting-uncertainty.git
+cd M5-Uncertainty-Demand-Forecasting
 
 # Install requirements
 pip install -r requirements.txt
