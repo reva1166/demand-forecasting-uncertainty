@@ -49,7 +49,7 @@ $$\text{Total Cost} = (c_{\text{under}} \times \text{Units Short}) + (c_{\text{o
 
 ---
 
-## Diagnostic Analysis & Known Failure Modes
+## Diagnostic Analysis 
 
 Through stratified error analysis, the pipeline revealed **conditional overconfidence during peak demand spikes**:
 - **Normal Days Coverage:** ~94.1% (reliable prediction bounds)
