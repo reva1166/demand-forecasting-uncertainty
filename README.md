@@ -81,12 +81,6 @@ Through stratified error analysis, the pipeline revealed **conditional overconfi
 
 ---
 
-## 💻 Installation & Usage
-
-
-# Clone repository
-git clone [https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git)
-cd YOUR_REPOSITORY_NAME
 
 # Install requirements
 pip install -r requirements.txt
